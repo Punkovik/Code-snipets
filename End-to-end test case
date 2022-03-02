@@ -1,0 +1,88 @@
+package smallTest;
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
+
+import java.util.concurrent.TimeUnit;
+
+public class Arbonne {
+    @Test
+    public void loginTestCredentials() throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver", "chromedriver");
+        WebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        driver.get("https://www.arbonne.com/us/en");
+
+        WebElement googleField =driver.findElement(By.xpath("//*[@class='icon-search mr-xs-3 mr-md-4']"));
+        googleField.sendKeys(Keys.ENTER);
+
+
+        WebElement searchField = driver.findElement(By.xpath("//*[@aria-label='Search Products']"));
+        searchField.sendKeys("SuperCalm Vegan Cleansing Milk with Agastache Blend");
+        searchField.sendKeys(Keys.ENTER);
+
+
+
+        WebElement scanElement = new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='d-flex justify-content-center']")));
+        Actions action =new Actions(driver);
+        action.moveToElement(scanElement).click().build().perform();
+        scanElement.click();
+
+
+        WebElement addButtonLocator = driver.findElement(By.xpath("//*[@class='add-to-cart btn-arbonne-primary']"));
+        addButtonLocator.click();
+
+
+        WebElement shoppingCartElement = driver.findElement(By.xpath("//*[@class='cart-qty body-label-spread-text notranslate']"));
+        shoppingCartElement.click();
+
+
+        WebElement deleteItemElement = driver.findElement(By.xpath("//*[@class='icon-cross icon-xs']"));
+        deleteItemElement.click();
+
+        driver.quit();
+
+    }
+    @Test
+    public void mainPage() throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver", "chromedriver");
+        WebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        driver.get("https://www.arbonne.com/us/en");
+
+        WebElement skincareLocator = driver.findElement(By.xpath("(//*[@class='c-name body-label-bold-text'])[3]"));
+        skincareLocator.click();
+
+        WebElement tabLocator = driver.findElement(By.xpath("//*[@href='/us/en/c/skincare']"));
+        tabLocator.click();
+
+
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("window.scrollBy(0,1500);");
+
+
+        WebElement productLocator = driver.findElement(By.xpath("//*[text()='SuperCalm Vegan Cleansing Milk with Agastache Blend']"));
+        productLocator.click();
+
+
+        WebElement addButtonLocator = driver.findElement(By.xpath("//*[@class='add-to-cart btn-arbonne-primary']"));
+        addButtonLocator.click();
+
+
+        WebElement shoppingCartElement = driver.findElement(By.xpath("//*[@class='cart-qty body-label-spread-text notranslate']"));
+        shoppingCartElement.click();
+
+
+        WebElement deleteItemElement = driver.findElement(By.xpath("//*[@class='icon-cross icon-xs']"));
+        deleteItemElement.click();
+
+        driver.quit();
+
+    }
+    }
