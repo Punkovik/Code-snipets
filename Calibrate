@@ -1,0 +1,57 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
+
+import java.util.concurrent.TimeUnit;
+
+public class Calibrate {
+    @Test
+    public void calibrateExplore() throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver", "chromedriver");
+        WebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        driver.get("https://www.joincalibrate.com/");
+
+        WebElement hiwField = driver.findElement(By.xpath("//*[text()='How It Works']"));
+        hiwField.click();
+
+
+
+        WebElement pricingField = driver.findElement(By.xpath("//*[text()='Pricing']"));
+        pricingField.click();
+
+
+        WebElement programField = driver.findElement(By.xpath("//*[text()='Program']"));
+        programField.click();
+
+
+        WebElement medicationField = driver.findElement(By.xpath("//*[text()='Medication']"));
+        medicationField.click();
+
+
+        WebElement faqField = driver.findElement(By.xpath("//*[text()='FAQ']"));
+        faqField.click();
+
+
+        WebElement resultField = driver.findElement(By.xpath("//*[text()='Results']"));
+        resultField.click();
+
+        WebElement logInLocator = driver.findElement(By.xpath("//*[text()='Sign In']"));
+        logInLocator.click();
+
+        WebElement emailLocator = driver.findElement(By.xpath("//*[@id='email']"));
+       emailLocator.sendKeys("anymail@gmail.com");
+
+       WebElement passwordLocator = driver.findElement(By.xpath("//*[@id='password']"));
+       passwordLocator.sendKeys("anypassword");
+       Thread.sleep(3000);
+       driver.quit();
+
+
+
+
+    }
+}
