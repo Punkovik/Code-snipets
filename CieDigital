@@ -1,0 +1,58 @@
+public class CinemaProject {
+    @Test
+    public void loginTestCredentials() throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver", "chromedriver");
+        WebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        driver.get("https://www.justwatch.com/us/movies");
+
+        WebElement homeElement = driver.findElement(By.linkText("Home"));
+        homeElement.click();
+
+        WebElement newLocator = driver.findElement(By.xpath("//*[text() = 'New']"));
+        newLocator.click();
+
+        WebElement popularElement = driver.findElement(By.linkText("Popular"));
+        popularElement.click();
+
+        WebElement watchlistLocator = driver.findElement(By.linkText("Watchlist"));
+        watchlistLocator.click();
+
+        WebElement sportsElement = driver.findElement(By.linkText("Sports"));
+        sportsElement.click();
+
+        WebElement searchLocator = driver.findElement(By.xpath("//*[@type='search']"));
+        searchLocator.sendKeys("Rick and Morty");
+        Thread.sleep(2000);
+        searchLocator.sendKeys(Keys.ENTER);
+
+        WebElement movieElement = driver.findElement(By.xpath("//*[text()='Rick and Morty']"));
+        movieElement.click();
+
+        WebElement signInLocator = driver.findElement(By.xpath("//*[text() = 'Sign In']"));
+        signInLocator.click();
+
+        WebElement signInElement = driver.findElement(By.xpath("//*[@class='account-modal-button mb account-modal__sign-in']"));
+        signInElement.click();
+
+        WebElement registrationField = driver.findElement(By.xpath("//*[text()='Continue with email/password']"));
+        registrationField.click();
+
+        WebElement emailLocator = driver.findElement(By.id("ui-sign-in-email-input"));
+        emailLocator.sendKeys("anymail@gmail.com");
+        emailLocator.sendKeys(Keys.ENTER);
+        WebElement passwordElement = driver.findElement(By.id("ui-sign-in-password-input"));
+        passwordElement.sendKeys("1234567");
+        passwordElement.sendKeys(Keys.ENTER);
+        Thread.sleep(10000);
+
+
+        WebElement userField = driver.findElement(By.xpath("//*[@class='svg-inline--fa fa-user-cog fa-w-20']"));
+        userField.click();
+
+        driver.quit();
+
+
+    }
+}
