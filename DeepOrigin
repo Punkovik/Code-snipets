@@ -38,3 +38,39 @@ describe('User Authentication API', () => {
     });
   });
 
+
+//For lack of additional details, I also used the second option in my opinion.
+
+
+
+describe('User Authentication API', () => {
+  it('Login and retrieve user details', () => {
+   
+    const loginUrl = 'https://dummyjson.com/auth/login';
+
+   
+    const credentials = {
+      username: 'kmichelle',
+      password: '0lelplR',
+    };
+
+ 
+    cy.request('POST', loginUrl, credentials).then((loginResponse) => {
+      expect(loginResponse.status).to.eq(200);
+      expect(loginResponse.body).to.have.property('token');
+      
+     
+      const userDetailsUrl = 'https://dummyjson.com/auth/me';
+      cy.request({
+        method: 'GET',
+        url: userDetailsUrl,
+        headers: {
+          Authorization: `Bearer ${loginResponse.body.token}`,
+        },
+      }).then((userDetailsResponse) => {
+        expect(userDetailsResponse.status).to.eq(200);
+        expect(userDetailsResponse.body).to.have.property('email');
+      });
+    });
+  });
+});
